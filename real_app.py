@@ -180,7 +180,15 @@ st.markdown("This chart counts how often key skills appear in job descriptions."
 
 skill_counts = {skill: filtered_df[skill].sum() for skill in skills}
 
-skill_df = pd.DataFrame(list(skill_counts.items()), columns=["Skill", "Count"])
+# Capitalize skill names for better UI
+skill_df["Skill"] = skill_df["Skill"].str.title()
+
+# Fix common formatting
+skill_df["Skill"] = skill_df["Skill"].replace({
+    "Sql": "SQL",
+    "Aws": "AWS",
+    "Power Bi": "Power BI"
+})
 
 fig3 = px.bar(
     skill_df,
