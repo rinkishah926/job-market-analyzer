@@ -7,6 +7,9 @@ import pandas as pd
 # Import matplotlib for charts
 import matplotlib.pyplot as plt
 
+# Import Plotly Express for creating interactive charts (hover, zoom, modern visuals)
+import plotly.express as px
+
 
 # -------------------------------
 # APP TITLE
@@ -123,16 +126,17 @@ st.markdown("---")
 
 st.subheader("Job Role Distribution")
 
-role_counts = filtered_df["clean_title"].value_counts()
+role_counts = filtered_df["clean_title"].value_counts().reset_index()
+role_counts.columns = ["Job Role", "Number of Jobs"]
 
-fig1, ax1 = plt.subplots()
-role_counts.plot(kind="bar", ax=ax1)
-ax1.set_xlabel("Job Role")
-ax1.set_ylabel("Number of Jobs")
-ax1.set_title("Job Role Distribution")
-plt.xticks(rotation=45)
+fig1 = px.bar(
+    role_counts,
+    x="Job Role",
+    y="Number of Jobs",
+    title="Job Role Distribution"
+)
 
-st.pyplot(fig1)
+st.plotly_chart(fig1, use_container_width=True)
 
 st.markdown("---")
 
