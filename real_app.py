@@ -182,6 +182,7 @@ skill_counts = {skill: filtered_df[skill].sum() for skill in skills}
 
 # Capitalize skill names for better UI
 skill_df["Skill"] = skill_df["Skill"].str.title()
+skill_df = pd.DataFrame(list(skill_counts.items()), columns=["Skill", "Count"])
 
 # Fix common formatting
 skill_df["Skill"] = skill_df["Skill"].replace({
