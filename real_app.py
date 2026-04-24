@@ -145,18 +145,25 @@ st.markdown("---")
 # SALARY BY ROLE
 # -------------------------------
 
+# Average Salary by Role (Interactive)
 st.subheader("Average Salary by Job Role")
 
-salary_by_role = filtered_df.groupby("clean_title")["clean_salary"].mean().sort_values(ascending=False)
+salary_by_role = (
+    filtered_df.groupby("clean_title")["clean_salary"]
+    .mean()
+    .sort_values(ascending=False)
+    .reset_index()
+)
 
-fig2, ax2 = plt.subplots()
-salary_by_role.plot(kind="bar", ax=ax2)
-ax2.set_xlabel("Job Role")
-ax2.set_ylabel("Average Salary")
-ax2.set_title("Average Salary by Job Role")
-plt.xticks(rotation=45)
+fig2 = px.bar(
+    salary_by_role,
+    x="clean_title",
+    y="clean_salary",
+    labels={"clean_title": "Job Role", "clean_salary": "Average Salary"},
+    title="Average Salary by Job Role"
+)
 
-st.pyplot(fig2)
+st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("---")
 
@@ -167,18 +174,18 @@ st.markdown("---")
 
 st.subheader("In-Demand Skills")
 
-skill_counts = {}
+skill_counts = {skill: filtered_df[skill].sum() for skill in skills}
 
-for skill in skills:
-    skill_counts[skill] = filtered_df[skill].sum()
+skill_df = pd.DataFrame(list(skill_counts.items()), columns=["Skill", "Count"])
 
-fig3, ax3 = plt.subplots()
-ax3.bar(skill_counts.keys(), skill_counts.values())
-ax3.set_xlabel("Skills")
-ax3.set_ylabel("Number of Jobs")
-ax3.set_title("In-Demand Skills")
+fig3 = px.bar(
+    skill_df,
+    x="Skill",
+    y="Count",
+    title="In-Demand Skills"
+)
 
-st.pyplot(fig3)
+st.plotly_chart(fig3, use_container_width=True)
 
 st.markdown("---")
 
@@ -189,13 +196,22 @@ st.markdown("---")
 
 st.subheader("Top Job Locations")
 
-location_counts = filtered_df["location"].value_counts().head(10)
+location_counts = (
+    filtered_df["location"]
+    .value_counts()
+    .head(10)
+    .reset_index()
+)
 
-fig4, ax4 = plt.subplots()
-location_counts.plot(kind="bar", ax=ax4)
-ax4.set_xlabel("Location")
-ax4.set_ylabel("Number of Jobs")
-ax4.set_title("Top Job Locations")
-plt.xticks(rotation=45)
+location_counts.columns = ["Location", "Count"]
+
+fig4 = px.bar(
+    location_counts,
+    x="Location",
+    y="Count",
+    title="Top Job Locations"
+)
+
+st.plotly_chart(fig4, use_container_width=True)
 
 st.pyplot(fig4)
