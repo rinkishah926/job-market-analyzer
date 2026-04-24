@@ -107,7 +107,8 @@ col3.metric("Top Role", filtered_df['clean_title'].value_counts().idxmax())
 # DATA PREVIEW
 # -------------------------------
 
-st.subheader("Cleaned Dataset Preview")
+st.markdown("### 📋 Cleaned Dataset Preview")
+st.markdown("This table shows a sample of the cleaned job postings used for the dashboard.")
 
 preview_columns = [
     "title", "company_name", "location",
@@ -124,7 +125,8 @@ st.markdown("---")
 # JOB ROLE DISTRIBUTION
 # -------------------------------
 
-st.subheader("Job Role Distribution")
+st.markdown("### 📊 Job Role Distribution")
+st.markdown("This chart shows which job roles appear most often in the dataset.")
 
 role_counts = filtered_df["clean_title"].value_counts().reset_index()
 role_counts.columns = ["Job Role", "Number of Jobs"]
@@ -146,7 +148,8 @@ st.markdown("---")
 # -------------------------------
 
 # Average Salary by Role (Interactive)
-st.subheader("Average Salary by Job Role")
+st.markdown("### 💰 Average Salary by Job Role")
+st.markdown("This chart compares average salary across job categories using the cleaned salary column.")
 
 salary_by_role = (
     filtered_df.groupby("clean_title")["clean_salary"]
@@ -172,7 +175,8 @@ st.markdown("---")
 # SKILL DEMAND
 # -------------------------------
 
-st.subheader("In-Demand Skills")
+st.markdown("### 🧠 In-Demand Skills")
+st.markdown("This chart counts how often key skills appear in job descriptions.")
 
 skill_counts = {skill: filtered_df[skill].sum() for skill in skills}
 
@@ -194,7 +198,8 @@ st.markdown("---")
 # TOP LOCATIONS
 # -------------------------------
 
-st.subheader("Top Job Locations")
+st.markdown("### 📍 Top Job Locations")
+st.markdown("This chart shows the most common job locations in the cleaned dataset.")
 
 location_counts = (
     filtered_df["location"]
