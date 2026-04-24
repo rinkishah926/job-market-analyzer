@@ -21,7 +21,8 @@ st.markdown("Analyze real job posting data to explore salary trends, job roles, 
 # LOAD DATA
 # -------------------------------
 
-df = pd.read_csv("data/gsearch_jobs.csv", encoding="latin1", on_bad_lines="skip")
+# Load smaller cleaned dataset for deployment
+df = pd.read_csv("data/clean_jobs_sample.csv")
 
 
 # -------------------------------
