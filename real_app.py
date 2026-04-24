@@ -135,7 +135,7 @@ fig1 = px.bar(
     role_counts,
     x="Job Role",
     y="Number of Jobs",
-    title="Job Role Distribution"
+    
 )
 
 st.plotly_chart(fig1, use_container_width=True)
@@ -163,7 +163,7 @@ fig2 = px.bar(
     x="clean_title",
     y="clean_salary",
     labels={"clean_title": "Job Role", "clean_salary": "Average Salary"},
-    title="Average Salary by Job Role"
+    
 )
 
 st.plotly_chart(fig2, use_container_width=True)
@@ -186,7 +186,7 @@ fig3 = px.bar(
     skill_df,
     x="Skill",
     y="Count",
-    title="In-Demand Skills"
+    
 )
 
 st.plotly_chart(fig3, use_container_width=True)
@@ -214,7 +214,7 @@ fig4 = px.bar(
     location_counts,
     x="Location",
     y="Count",
-    title="Top Job Locations"
+    
 )
 
 st.plotly_chart(fig4, use_container_width=True)
