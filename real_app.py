@@ -36,7 +36,7 @@ df = df.drop(columns=[
     'thumbnail',
     'commute_time',
     'description_tokens'
-])
+], errors="ignore")
 
 df['location'] = df['location'].fillna('Unknown')
 
@@ -54,7 +54,7 @@ df = df.drop(columns=[
     'salary_hourly',
     'salary_yearly',
     'salary_standardized'
-])
+], errors="ignore")
 
 
 # -------------------------------
