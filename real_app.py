@@ -92,13 +92,27 @@ else:
     filtered_df = df
 
 
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Total Jobs", len(filtered_df))
+col2.metric("Average Salary", f"${filtered_df['clean_salary'].mean():,.0f}")
+col3.metric("Top Role", filtered_df['clean_title'].value_counts().idxmax())
+
+
 # -------------------------------
 # DATA PREVIEW
 # -------------------------------
 
 st.subheader("Cleaned Dataset Preview")
 
-st.write(filtered_df.head(20))
+preview_columns = [
+    "title", "company_name", "location",
+    "clean_salary", "clean_title",
+    "python", "sql", "excel", "tableau", "power bi", "aws"
+]
+
+st.dataframe(filtered_df[preview_columns].head(20))
 
 st.markdown("---")
 
