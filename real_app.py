@@ -40,21 +40,7 @@ df = df.drop(columns=[
 
 df['location'] = df['location'].fillna('Unknown')
 
-df = df[df['salary_standardized'].notnull()]
 
-df['clean_salary'] = df['salary_standardized'].astype(int)
-
-df = df.drop(columns=[
-    'salary',
-    'salary_pay',
-    'salary_rate',
-    'salary_avg',
-    'salary_min',
-    'salary_max',
-    'salary_hourly',
-    'salary_yearly',
-    'salary_standardized'
-], errors="ignore")
 
 
 # -------------------------------
